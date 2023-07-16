@@ -26,7 +26,7 @@ function matchStringInNode(node: Node, exp: RegExp | string) {
   return matchCount
 }
 
-const CustomButton = () => {
+const PizzaRatingOverlay = () => {
   const pizzaCount = matchStringInNode(document.body, /pizza/gi)
   const totalWordCount = document.body.textContent.trim().split(" ").length
 
@@ -42,4 +42,4 @@ const CustomButton = () => {
   )
 }
 
-export default CustomButton
+export default PizzaRatingOverlay
