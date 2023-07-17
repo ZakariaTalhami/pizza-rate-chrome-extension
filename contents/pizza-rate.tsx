@@ -1,4 +1,5 @@
 import overlayStyle from "data-text:./overlay.scss"
+import filledPizzaIcon from "data-base64:~assets/pizza.png"
 import { PlasmoGetStyle } from "plasmo"
 
 export const getStyle: PlasmoGetStyle = () => {
@@ -26,6 +27,10 @@ function matchStringInNode(node: Node, exp: RegExp | string) {
   return matchCount
 }
 
+const PizzaIcon = () => {
+  return <img src={filledPizzaIcon} className="pizzaIcon" />
+}
+
 const PizzaRatingOverlay = () => {
   const pizzaCount = matchStringInNode(document.body, /pizza/gi)
   const totalWordCount = document.body.textContent.trim().split(" ").length
@@ -37,7 +42,7 @@ const PizzaRatingOverlay = () => {
 
   return (
     <div className="overlay" title={`${pizzaCount}/${totalWordCount}`}>
-      {parseFloat(pizzaRating.toFixed(1))}/5 Pizzas
+      {parseFloat(pizzaRating.toFixed(1))}/5 <PizzaIcon />
     </div>
   )
 }
