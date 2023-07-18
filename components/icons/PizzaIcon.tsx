@@ -3,8 +3,9 @@ import outlinePizzaIcon from "data-base64:~assets/pizza-outline.png"
 import styled from "styled-components"
 
 const PizzaIconImg = styled.img`
-    width: 24px;
-    align-self: center;
+  width: 24px;
+  align-self: center;
+  user-select: none;
 `
 
 type IconVariant = "filled" | "outlined"
@@ -21,7 +22,7 @@ const pizzaIconVariantMap: Record<IconVariant, string> = {
 const PizzaIcon = ({
   variant = "filled"
 }: PizzaIconProp = defaultPizzaIconProp) => {
-  return <PizzaIconImg src={pizzaIconVariantMap[variant]} />
+  return <PizzaIconImg draggable="false" src={pizzaIconVariantMap[variant]} />
 }
 
 export default PizzaIcon
