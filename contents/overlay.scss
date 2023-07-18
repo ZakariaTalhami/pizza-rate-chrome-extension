@@ -14,25 +14,7 @@
   color: black;
   font-size: medium;
 
-  .pizzaIcon {
-    width: 24px;
-    align-self: center;
-  }
-
   .divisionSlash {
     margin: 0 0.1rem;
-  }
-}
-
-.pizzaRatingIcon {
-  position: relative;
-  
-  .pizzaRatingIconTop {
-    display: inline;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    overflow-x: hidden;
   }
 }
