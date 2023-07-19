@@ -3,6 +3,7 @@ import outlinePizzaIcon from "data-base64:~assets/pizza-outline.png"
 import styled from "styled-components"
 
 const PizzaIconImg = styled.img`
+  display: block;
   width: 24px;
   align-self: center;
   user-select: none;
