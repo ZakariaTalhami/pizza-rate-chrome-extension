@@ -1,4 +1,5 @@
 import { StyleSheetManager } from "styled-components"
+import Draggable from "react-draggable"
 // Types
 import type { PlasmoGetStyle, PlasmoCSUIProps } from "plasmo"
 // Assets
@@ -29,9 +30,13 @@ const PizzaRatingOverlay = ({ anchor }: PlasmoCSUIProps) => {
 
   return (
     <StyleSheetManager target={anchor.element.firstElementChild.shadowRoot}>
-      <div className="overlay" title={overlayTitle}>
-        <PizzaRatingIcon rating={rating} />
-      </div>
+      <Draggable
+        axis="y"
+      >
+        <div className="overlay" title={overlayTitle}>
+          <PizzaRatingIcon rating={rating} />
+        </div>
+      </Draggable>
     </StyleSheetManager>
   )
 }
