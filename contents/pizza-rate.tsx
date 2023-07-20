@@ -1,5 +1,7 @@
+import {useRef } from "react"
 import { StyleSheetManager } from "styled-components"
-import Draggable from "react-draggable"
+import Draggable, { type DraggableEventHandler } from "react-draggable"
+import { useStorage } from "@plasmohq/storage/hook"
 // Types
 import type { PlasmoGetStyle, PlasmoCSUIProps } from "plasmo"
 // Assets
@@ -17,6 +19,19 @@ export const getStyle: PlasmoGetStyle = () => {
 }
 
 const PizzaRatingOverlay = ({ anchor }: PlasmoCSUIProps) => {
+  const draggableRef = useRef<Draggable>()
+  const [overlayPosition, setOverlayPosition] = useStorage(
+    "overlayPosition",
+    (v) => (v === undefined ? 50 : v)
+  )
+
+  const onDragDropped: DraggableEventHandler = (event, data) => {
+    setOverlayPosition(data.y)
+    // To prevent jumping effect on drop. Update
+    // the draggable position before rerender.
+    draggableRef.current.props.position.y = data.y
+  }
+
   const { rating, pizzaCount, totalWordCount } = getNodePizzaRating(
     document.body
   )
@@ -31,8 +46,10 @@ const PizzaRatingOverlay = ({ anchor }: PlasmoCSUIProps) => {
   return (
     <StyleSheetManager target={anchor.element.firstElementChild.shadowRoot}>
       <Draggable
+        ref={draggableRef}
         axis="y"
-      >
+        onStop={onDragDropped}
+        position={{ x: 0, y: overlayPosition }}>
         <div className="overlay" title={overlayTitle}>
           <PizzaRatingIcon rating={rating} />
         </div>
