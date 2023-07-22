@@ -6,6 +6,7 @@ const InfoTableDisplayContainer = styled.div`
   display: grid;
   column-gap: 1rem;
   grid-template-columns: 3fr 2fr;
+  padding: 0 1rem;
 `
 
 type InfoTableData = Record<string, string>
@@ -19,7 +20,7 @@ const InfoTableDisplay = ({ data }: InfoTableDisplayProp) => {
       {Object.keys(data).map((labelText, index) => (
         <React.Fragment key={index}>
           <Header as="h3">{labelText}</Header>
-          <Header as="h3">{data[labelText]}</Header>
+          <Header as="h3" style={{color: "#a1a1a1"}}>{data[labelText]}</Header>
         </React.Fragment>
       ))}
     </InfoTableDisplayContainer>
