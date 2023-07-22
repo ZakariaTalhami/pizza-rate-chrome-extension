@@ -1,5 +1,6 @@
 import PizzaIcon from "./PizzaIcon"
 import styled from "styled-components"
+import { type SizableComponentProps } from "~components/sharedTypes"
 
 const PizzaRatingIconContainer = styled.div`
   position: relative;
@@ -14,7 +15,7 @@ const PizzaRatingIndicatorIcon = styled.div`
   overflow-x: hidden;
 `
 
-type PizzaRatingIconProp = {
+type PizzaRatingIconProp = SizableComponentProps & {
   rating: number
 }
 
@@ -23,15 +24,16 @@ const defaultPizzaRatingIconProp: PizzaRatingIconProp = {
 }
 
 const PizzaRatingIcon = ({
-  rating
+  rating,
+  size
 }: PizzaRatingIconProp = defaultPizzaRatingIconProp) => {
   rating = Math.min(rating, 1) * 100
 
   return (
     <PizzaRatingIconContainer>
-      <PizzaIcon variant="outlined" />
+      <PizzaIcon size={size} variant="outlined" />
       <PizzaRatingIndicatorIcon style={{ width: `${rating}%` }}>
-        <PizzaIcon />
+        <PizzaIcon size={size} />
       </PizzaRatingIndicatorIcon>
     </PizzaRatingIconContainer>
   )

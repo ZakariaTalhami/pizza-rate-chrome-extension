@@ -1,7 +1,7 @@
 import filledPizzaIcon from "data-base64:~assets/pizza.png"
 import outlinePizzaIcon from "data-base64:~assets/pizza-outline.png"
 import styled, { css } from "styled-components"
-import { ComponentSize, SizableComponentProps } from "~components/sharedTypes"
+import { type ComponentSize, type SizableComponentProps } from "~components/sharedTypes"
 
 type IconVariant = "filled" | "outlined"
 type PizzaIconProp = { variant?: IconVariant } & SizableComponentProps

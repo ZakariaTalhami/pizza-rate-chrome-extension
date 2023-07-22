@@ -1,7 +1,8 @@
-import {useRef } from "react"
+import { useRef } from "react"
 import { StyleSheetManager } from "styled-components"
 import Draggable, { type DraggableEventHandler } from "react-draggable"
 import { useStorage } from "@plasmohq/storage/hook"
+import { useMessage } from "@plasmohq/messaging/hook"
 // Types
 import type { PlasmoGetStyle, PlasmoCSUIProps } from "plasmo"
 // Assets
@@ -24,6 +25,14 @@ const PizzaRatingOverlay = ({ anchor }: PlasmoCSUIProps) => {
     "overlayPosition",
     (v) => (v === undefined ? 50 : v)
   )
+  useMessage((req, res) => {
+    res.send({
+      rating,
+      pizzaCount,
+      totalWordCount,
+      pizzaRating
+    })
+  })
 
   const onDragDropped: DraggableEventHandler = (event, data) => {
     setOverlayPosition(data.y)
