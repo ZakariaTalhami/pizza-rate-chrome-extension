@@ -5,16 +5,24 @@ import { MAX_PIZZA_RATING } from "~core/constants"
 import Header from "~components/typography/Header"
 import InfoTableDisplay from "~components/dataDisplay/InfoTableDisplay"
 import PopupContainer from "~components/layout/PopupContainer"
+import Loader from "~components/loaders/Loader"
 
 const getTabPizzaStats = async () => {
-  const currentTab = (
-    await chrome.tabs.query({
-      active: true,
-      currentWindow: true
+  try {
+    const currentTab = (
+      await chrome.tabs.query({
+        active: true,
+        currentWindow: true
+      })
+    )[0]
+    const tabPizzaStats = await sendToContentScript({
+      name: "getTabPizzaRating"
     })
-  )[0]
-  const tabPizzaStats = await sendToContentScript({ name: "getTabPizzaRating" })
-  return [currentTab, tabPizzaStats]
+    return [currentTab, tabPizzaStats]
+  } catch (error) {
+    console.error(error)
+    return [null, null]
+  }
 }
 
 function IndexPopup() {
@@ -22,15 +30,17 @@ function IndexPopup() {
   const [currentTab, setCurrentTab] = useState<chrome.tabs.Tab>(null)
 
   useEffect(() => {
-    getTabPizzaStats().then(([currentTab, tabPizzaStats]) => {
-      setCurrentTab(currentTab)
-      setTabPizzRating(tabPizzaStats)
-    })
-  }, [])
-
+    if (!currentTab) {
+      getTabPizzaStats().then(([currentTab, tabPizzaStats]) => {
+        setCurrentTab(currentTab)
+        setTabPizzRating(tabPizzaStats)
+      })
+    }
+  }, [currentTab])
 
   return (
     <PopupContainer>
+      {!currentTab && <Loader />}
       {currentTab && <Header $centered>{currentTab.title}</Header>}
       {tabPizzaRating && (
         <>
