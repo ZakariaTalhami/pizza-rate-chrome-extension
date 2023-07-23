@@ -6,6 +6,8 @@ import Header from "~components/typography/Header"
 import InfoTableDisplay from "~components/dataDisplay/InfoTableDisplay"
 import PopupContainer from "~components/layout/PopupContainer"
 import Loader from "~components/loaders/Loader"
+import { ThemeProvider } from "styled-components"
+import defaultTheme from "~core/theme"
 
 const getTabPizzaStats = async () => {
   try {
@@ -39,31 +41,33 @@ function IndexPopup() {
   }, [currentTab])
 
   return (
-    <PopupContainer>
-      {!currentTab && <Loader />}
-      {currentTab && (
-        <Header $ellipsis $centered>
-          {currentTab.title}
-        </Header>
-      )}
-      {tabPizzaRating && (
-        <>
-          <Header $centered as="h2">
-            {`Rating: ${parseFloat(
-              (tabPizzaRating.rating * MAX_PIZZA_RATING).toFixed(1)
-            )} / ${MAX_PIZZA_RATING}`}
+    <ThemeProvider theme={defaultTheme}>
+      <PopupContainer>
+        {!currentTab && <Loader />}
+        {currentTab && (
+          <Header $ellipsis $centered color="primary">
+            {currentTab.title}
           </Header>
-          <PizzaRatingIconGroup
-            rating={tabPizzaRating.rating}
-            numberOfPizzas={MAX_PIZZA_RATING}
-          />
-          <Header $centered as="h2">
-            Statistics
-          </Header>
-          <TabPizzaStatisticsTable {...tabPizzaRating} />
-        </>
-      )}
-    </PopupContainer>
+        )}
+        {tabPizzaRating && (
+          <>
+            <Header $centered as="h2">
+              {`Rating: ${parseFloat(
+                (tabPizzaRating.rating * MAX_PIZZA_RATING).toFixed(1)
+              )} / ${MAX_PIZZA_RATING}`}
+            </Header>
+            <PizzaRatingIconGroup
+              rating={tabPizzaRating.rating}
+              numberOfPizzas={MAX_PIZZA_RATING}
+            />
+            <Header $centered as="h2">
+              Statistics
+            </Header>
+            <TabPizzaStatisticsTable {...tabPizzaRating} />
+          </>
+        )}
+      </PopupContainer>
+    </ThemeProvider>
   )
 }
 

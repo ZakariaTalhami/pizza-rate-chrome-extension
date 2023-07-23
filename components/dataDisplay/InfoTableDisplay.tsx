@@ -20,7 +20,7 @@ const InfoTableDisplay = ({ data }: InfoTableDisplayProp) => {
       {Object.keys(data).map((labelText, index) => (
         <React.Fragment key={index}>
           <Header as="h3">{labelText}</Header>
-          <Header as="h3" style={{color: "#a1a1a1"}}>{data[labelText]}</Header>
+          <Header as="h3" color="secondary">{data[labelText]}</Header>
         </React.Fragment>
       ))}
     </InfoTableDisplayContainer>
