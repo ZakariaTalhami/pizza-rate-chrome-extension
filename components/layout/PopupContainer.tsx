@@ -1,8 +1,9 @@
 import { styled } from "styled-components";
 
 const PopupContainer = styled.div`
-    display: felx;
-    flexContainer: column;
+    display: flex;
+    width: 375px;
+    flex-direction: column;
     padding: 16px;
 `
 

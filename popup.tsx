@@ -41,7 +41,11 @@ function IndexPopup() {
   return (
     <PopupContainer>
       {!currentTab && <Loader />}
-      {currentTab && <Header $centered>{currentTab.title}</Header>}
+      {currentTab && (
+        <Header $ellipsis $centered>
+          {currentTab.title}
+        </Header>
+      )}
       {tabPizzaRating && (
         <>
           <Header $centered as="h2">

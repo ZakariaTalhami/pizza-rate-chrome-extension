@@ -36,7 +36,7 @@ const Loader = (props: LoaderProp) => {
         <LoaderPart />
         <LoaderPart style={{ right: "0", bottom: "0" }} />
       </LoaderContainer>
-      <Header as="h3">Loading...</Header>
+      <Header $centered as="h3">Loading...</Header>
     </div>
   )
 }
